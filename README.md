@@ -1,1 +1,0 @@
-# terraform-nodejs-app-dynamodb

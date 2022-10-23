@@ -1,0 +1,3 @@
+# terraform-nodejs-app-dynamodb
+
+This module uses Terraform to deploy a NodeJS application using a DynamoDB table 
