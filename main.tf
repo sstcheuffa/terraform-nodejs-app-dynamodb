@@ -10,3 +10,24 @@ provider "aws" {
   region = "us-east-1"
 }
 
+data "archive_file" "note-create-archive" {
+  source_file = "lambdas/note-create.js"
+  output_path = "lambdas/note-create.zip"
+  type        = "zip"
+}
+
+resource "aws_lambda_function" "note-create" {
+  environment {
+    variables = {
+      NOTES_TABLE = aws_dynamodb_table.tf_notes_table.name
+    }
+  }
+  memory_size   = "128"
+  timeout       = 10
+  runtime       = "nodejs14.x"
+  architectures = ["arm64"]
+  handler       = "lambdas/note-create.handler"
+  function_name = "note-create"
+  role          = aws_iam_role.iam_for_lambda.arn
+  filename      = "lambdas/note-create.zip"
+}

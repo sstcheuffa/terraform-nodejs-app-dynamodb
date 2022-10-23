@@ -1,0 +1,10 @@
+{
+  "name": "lambdas",
+  "version": "1.0.0",
+  "description": "CRUD modules for lambda functions",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Serge Tcheuffa",
+  "license": "ISC"
+}
