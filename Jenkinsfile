@@ -18,7 +18,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'terraform init  -migrate-state'                
+                sh 'terraform init  -force-copy -input=false'                
                 //sh 'terraform init '                
                 sh 'terraform plan -input=false -out tfplan'
                 sh 'terraform show -no-color tfplan > tfplan.txt'
