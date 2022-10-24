@@ -1,5 +1,5 @@
-resource "aws_s3_bucket_object_lock_configuration" "bucket-state-management" {
-  bucket = "pipeline-jenkins-git-terraform-dynamodb-lambda-state-backend"
+resource "aws_s3_bucket_object_lock_configuration" "bucket" {
+  bucket = "jenkins-git-terraform-dynamodb-lambda-state-backend"
   object_lock_enabled = "Enabled"
 }
 
