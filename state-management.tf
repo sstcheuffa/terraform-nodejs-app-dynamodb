@@ -4,13 +4,13 @@ resource "aws_s3_bucket" "bucket" {
   object_lock_enabled = "true"
 }
 
-resource "aws_s3_bucket_versioning" "bucket_versioning" {
+/*resource "aws_s3_bucket_versioning" "bucket_versioning" {
     bucket              = "jenkins-git-terraform-dynamodb-lambda-state-backend"
     versioning_configuration {
         status = "Disabled"
         mfa_delete = "Disabled"
   }
-}
+}*/
 
 resource "aws_dynamodb_table" "terraform-lock" {
   name           = "terraform_state"
