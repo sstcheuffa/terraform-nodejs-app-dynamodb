@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage("Checkout") {
             steps {
-              checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'Uhttps://github.com/sstcheuffa/terraform-nodejs-app-dynamodb.git']]])   
+              checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/sstcheuffa/terraform-nodejs-app-dynamodb.git']]])   
             }
         }
 
