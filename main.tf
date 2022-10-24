@@ -1,12 +1,10 @@
 terraform {
-terraform {
- backend "s3" {
-   bucket = "jenkins-git-terraform-dynamodb-lambda-state-backend"
-   key = "terraform.tfstate"
-   region = "us-east-1"
-   dynamodb_table = "terraform_state"
- }
-}
+  backend "s3" {
+    bucket         = "jenkins-git-terraform-dynamodb-lambda-state-backend"
+    key            = "terraform.tfstate"
+    region         = "us-east-1"
+    dynamodb_table = "terraform_state"
+  }
 
   required_providers {
     aws = {
