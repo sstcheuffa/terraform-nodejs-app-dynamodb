@@ -1,5 +1,5 @@
 pipeline {
-    agent: any
+    agent any
     parameters {
         booleanParam(name: 'autoapprove', defaultValue: 'false', description: 'Automatically run apply after generating plan?')
         booleanParam(name: 'destroy', defaultValue: false, description: 'Destroy Terraform build?')
