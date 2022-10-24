@@ -1,14 +1,16 @@
 const AWS = require("aws-sdk"); // using the SDK
 const NOTES_TABLE = process.env.NOTES_TABLE; // obtaining the table name
+
 const documentClient = new AWS.DynamoDB.DocumentClient();
 
 module.exports.handler = async (event, context) => {
  // create a new object
 
- const body = event.body;const newNote = {
-   ...body,
-   noteId: Date.now(),
-   expiryPeriod: Date.now(), // specify TTL
+ const my_body = event.body;
+ const newNote = {
+    body: event.body,
+    noteId: (Date.now()).toString(),
+    expiryPeriod: Date.now(), // specify TTL
  };
   
  // insert it to the table
@@ -22,6 +24,6 @@ module.exports.handler = async (event, context) => {
     
  // return the created object
 
- return {statusCode: 200,body: JSON.stringify(newNote), 
+ return {statusCode: 200, body: JSON.stringify(newNote), table: NOTES_TABLE
  }; 
 };

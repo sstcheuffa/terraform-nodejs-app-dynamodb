@@ -7,7 +7,7 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-east-1"
+  region = var.aws_region
 }
 
 data "archive_file" "note-create-archive" {
@@ -52,4 +52,27 @@ resource "aws_lambda_function" "note-delete" {
   function_name = "note-delete"
   role          = aws_iam_role.iam_for_lambda.arn
   filename      = "lambdas/note-delete.zip"
+}
+
+data "archive_file" "note-get-all-archive" {
+  source_file = "lambdas/note-get-all.js"
+  output_path = "lambdas/note-get-all.zip"
+  type        = "zip"
+}
+
+
+resource "aws_lambda_function" "note-get-all" {
+  environment {
+    variables = {
+      NOTES_TABLE = aws_dynamodb_table.tf_notes_table.name
+    }
+  }
+  memory_size   = "128"
+  timeout       = 10
+  runtime       = "nodejs14.x"
+  architectures = ["arm64"]
+  handler       = "lambdas/note-get-all.handler"
+  function_name = "note-get-all"
+  role          = aws_iam_role.iam_for_lambda.arn
+  filename      = "lambdas/note-get-all.zip"
 }
