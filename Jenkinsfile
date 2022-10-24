@@ -5,7 +5,7 @@ pipeline {
         booleanParam(name: 'destroy', defaultValue: false, description: 'Destroy Terraform build?')
     }
     stages {
-        stage("Checkout") {
+        stage("Git - Checkout") {
             steps {
               checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/sstcheuffa/terraform-nodejs-app-dynamodb.git']]])   
             }
