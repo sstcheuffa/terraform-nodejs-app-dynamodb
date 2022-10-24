@@ -18,7 +18,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'terraform init  -reconfigure -input=false'                
+                sh 'terraform init  -migrate-state -input=false'                
                 //sh 'terraform init '                
                 sh 'terraform plan -input=false -out tfplan'
                 sh 'terraform show -no-color tfplan > tfplan.txt'
