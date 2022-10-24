@@ -2,7 +2,7 @@ terraform {
   backend "s3" {
     bucket         = "pipeline-jenkins-git-terraform-dynamodb-lambda-state-backend"
     key            = "terraform.tfstate"
-    region         = "us-east-1"
+    region         = var.aws_region
     dynamodb_table = "terraform_state"
   }
 
