@@ -5,12 +5,20 @@ pipeline {
         booleanParam(name: 'destroy', defaultValue: false, description: 'Destroy Terraform build?')
     }
     stages {
+        
         stage("Git - Checkout") {
             steps {
               checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/sstcheuffa/terraform-nodejs-app-dynamodb.git']]])   
             }
         }
-
+        
+        stage("Init without backend") {
+            steps {
+                sh 'terraform init -backend=false'
+                #sh 'terraform init  -migrate-state -input=false'  
+            }
+        }
+        
         stage("Terraform - Planning > saving plan to tfplan file") {
             when {
                 not {
@@ -18,7 +26,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'terraform init  -migrate-state -input=false'                
+                              
                 //sh 'terraform init '                
                 sh 'terraform plan -input=false -out tfplan'
                 sh 'terraform show -no-color tfplan > tfplan.txt'
